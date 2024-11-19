@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "485cda16-0d43-4aa6-ac55-116fb41d8f17",
+		"name": "Banking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/register",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "auth", "register"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/login",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "auth", "login"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Banking Operations",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"bankName\": \"Bank of Example\",\n\t\"ownerName\": \"John Doe\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/accounts",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "accounts"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Balance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sortCode\": \"53-68-92\",\n\t\"accountNumber\": \"73084635\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/accounts",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "accounts"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sourceAccount\": {\n\t\t\"sortCode\": \"53-68-92\",\n\t\t\"accountNumber\": \"73084635\"\n\t},\n\t\"targetAccount\": {\n\t\t\"sortCode\": \"65-93-37\",\n\t\t\"accountNumber\": \"21956204\"\n\t},\n\t\"amount\": 105.0,\n\t\"reference\": \"Test Transfer\",\n\t\"latitude\": 66.23423423,\n\t\"longitude\": 105.234234\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/transactions",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "transactions"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/accounts/{{accountId}}/transactions",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "accounts", "{{accountId}}", "transactions"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sortCode\": \"35-16-67\",\n\t\"accountNumber\": \"95753174\",\n    \"amount\": 100.00\n}\n"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/withdraw",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "withdraw"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"targetAccountNo\": \"95753174\",\n    \"amount\": 1000.00\n}\n"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/deposit",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "v1", "deposit"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
